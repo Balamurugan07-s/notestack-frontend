@@ -12,6 +12,12 @@ export default function NoteDetails() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
+  const getFileUrl = (path) => {
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+    const baseUrl = apiUrl.replace(/\/api$/, '');
+    return `${baseUrl}/${path.replace(/\\/g, '/')}`;
+  };
+
   useEffect(() => {
     api.get(`/notes/${id}`)
       .then(res => setNote(res.data))
@@ -86,7 +92,7 @@ export default function NoteDetails() {
               {note.filePath && (
                 <>
                   <a
-                    href={`http://localhost:8080/${note.filePath.replace(/\\/g, '/')}`}
+                    href={getFileUrl(note.filePath)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 bg-white text-indigo-600 border border-indigo-200 px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-50 transition shadow-sm"
@@ -98,7 +104,7 @@ export default function NoteDetails() {
                     onClick={async () => {
                       const toastId = toast.loading('Downloading file...');
                       try {
-                        const url = `http://localhost:8080/${note.filePath.replace(/\\/g, '/')}`;
+                        const url = getFileUrl(note.filePath);
                         const response = await fetch(url);
                         if (!response.ok) throw new Error('Download failed');
                         const blob = await response.blob();
