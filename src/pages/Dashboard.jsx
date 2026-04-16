@@ -75,9 +75,9 @@ export default function Dashboard() {
         {/* Content Section */}
         <div>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-gray-800">Recent Notes</h2>
+            <h2 className="text-xl font-bold text-gray-800">Community Notes Feed</h2>
             <Link to="/mynotes" className="text-sm font-medium text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
-              View all <ArrowRight size={16} />
+              My Notes <ArrowRight size={16} />
             </Link>
           </div>
 

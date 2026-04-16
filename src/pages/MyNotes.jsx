@@ -12,7 +12,7 @@ export default function MyNotes() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    api.get('/notes')
+    api.get('/notes/my')
       .then(res => setNotes(res.data))
       .catch(() => setError('Failed to load notes'))
       .finally(() => setLoading(false))

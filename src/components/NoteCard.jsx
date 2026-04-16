@@ -31,9 +31,16 @@ export default function NoteCard({ note, onDelete, index = 0 }) {
         )}
       </div>
 
-      <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed flex-grow">
-        {note.description || <span className="italic opacity-50">No description provided</span>}
-      </p>
+      <div className="flex flex-col gap-2 flex-grow">
+        <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
+          {note.description || <span className="italic opacity-50">No description provided</span>}
+        </p>
+        {note.user?.username && (
+          <p className="text-xs text-slate-400/80 font-medium italic">
+            Uploaded by: <span className="text-slate-500">{note.user.username}</span>
+          </p>
+        )}
+      </div>
 
       <div className="flex items-center justify-between pt-4 border-t border-gray-100/80 mt-1">
         {note.filePath ? (
